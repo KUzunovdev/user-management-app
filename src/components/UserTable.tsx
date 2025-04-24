@@ -4,6 +4,11 @@ import { User } from "../types/User";
 import { EditFilled, DeleteFilled } from "@ant-design/icons";
 import { useState } from "react";
 
+
+interface Props {
+  onEditUser: (user: User) => void;
+}
+
 const staticUsers: User[] = [
   {
     id: 1,
@@ -52,12 +57,13 @@ const staticUsers: User[] = [
   },
 ];
 
-const UserTable = () => {
+const UserTable: React.FC<Props> = ({ onEditUser }) => {
+
 
     const [currentPage, setCurrentPage] = useState(1);
 
   const handleEdit = (record: User) => {
-    console.log("Edit user:", record);
+    onEditUser(record);
   };
 
   const handleDelete = (id: number) => {
