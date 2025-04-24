@@ -2,9 +2,11 @@ import { useState, useEffect } from "react";
 import UserTable from "./components/UserTable";
 import UserModal from "./components/UserModal";
 import { User } from "./types/User";
-import { Button, notification } from "antd";
+import { Button, notification, Typography } from "antd";
 import { deleteUser, getUsers, updateUser, createUser } from "./api/userApi";
 import { UserAddOutlined } from "@ant-design/icons";
+
+const { Title } = Typography;
 
 
 function App() {
@@ -135,20 +137,20 @@ function App() {
   
 
   return (
-    <div className="min-h-screen flex justify-center items-start py-10 px-4">
-    <div className="w-full max-w-6xl">
-    <div className="flex items-center justify-between mb-4">
-  <h1 className="text-2xl font-semibold">User Information</h1>
-  <Button
-    type="primary"
-    icon={<UserAddOutlined />}
-    onClick={() => {
-      setSelectedUser(null);
-      setIsModalOpen(true);
-    }}
-  >
-    Create new User
-  </Button>
+    <div className="min-h-screen flex justify-center items-center py-10 px-4">
+    <div className="w-full px-20">
+    <div className="flex items-center justify-between mb-2 px-8">
+    <Title level={2}>User Information</Title>
+    <Button
+      type="primary"
+      icon={<UserAddOutlined />}
+      onClick={() => {
+        setSelectedUser(null);
+        setIsModalOpen(true);
+      }}
+    >
+      Create new User
+    </Button>
 </div>
 
       {contextHolder}
@@ -161,10 +163,12 @@ function App() {
 
 
       <UserModal
+        key={selectedUser ? `edit-${selectedUser.id}` : "create"}
         open={isModalOpen}
         onClose={handleModalClose}
         onSubmit={handleModalSubmit}
         initialValues={selectedUser}
+        mode={selectedUser ? "edit" : "create"}
       />
     </div>
   </div>

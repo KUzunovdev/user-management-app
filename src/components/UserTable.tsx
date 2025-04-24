@@ -49,7 +49,7 @@ const UserTable: React.FC<UserTableProps> = ({ data, loading, onEditUser, onDele
       title: "Settings",
       key: "action",
       render: (_, record) => (
-        <div className="flex gap-2">
+        <div className="flex gap-4">
           <Button
             type="primary"
             icon={<EditFilled />}
@@ -65,6 +65,7 @@ const UserTable: React.FC<UserTableProps> = ({ data, loading, onEditUser, onDele
             cancelText="No"
             arrow={{ pointAtCenter: true }}
             placement="bottom"
+            style={{ width: 250 }}
           >
             <Button type="primary" danger icon={<DeleteFilled />}>
             Delete

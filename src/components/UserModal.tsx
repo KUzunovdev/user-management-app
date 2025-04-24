@@ -2,7 +2,7 @@ import { Modal, Form, Input, Button, Select } from "antd";
 import { EditFilled } from "@ant-design/icons";
 import { User } from "../types/User";
 import { useEffect } from "react";
-
+import { UserAddOutlined } from "@ant-design/icons";
 const { Option } = Select;
 
 interface UserModalProps {
@@ -10,6 +10,7 @@ interface UserModalProps {
   onClose: () => void;
   onSubmit: (values: Partial<User>) => void;
   initialValues?: User | null;
+  mode: "create" | "edit";
 }
 
 const UserModal: React.FC<UserModalProps> = ({
@@ -17,16 +18,20 @@ const UserModal: React.FC<UserModalProps> = ({
   onClose,
   onSubmit,
   initialValues,
+  mode,
 }) => {
   const [form] = Form.useForm();
 
   useEffect(() => {
-    if (initialValues) {
+    if (mode === "edit" && initialValues) {
       form.setFieldsValue(initialValues);
-    } else {
+    } else if (mode === "create") {
       form.resetFields();
     }
-  }, [initialValues, form]);
+  }, [initialValues, mode, form]);
+  
+
+
 
   const handleFinish = (values: Partial<User>) => {
     onSubmit(values);
@@ -44,11 +49,22 @@ const UserModal: React.FC<UserModalProps> = ({
       style={{ maxWidth: 600, padding : 20 }}
     >
       <div className="flex flex-col items-center justify-center text-center mb-4">
-        <EditFilled style={{ fontSize: 56, color: "#1677FF" }} />
-        <h2 className="text-2xl font-bold mt-2">Edit User Information</h2>
-        <p className="text-gray-500 text-sm">
-          Here, you can update your name, email address, and other information.
-        </p>
+      {mode === "edit" ? (
+  <EditFilled style={{ fontSize: 56, color: "#1677FF" }} />
+) : (
+  <UserAddOutlined style={{ fontSize: 56, color: "#1677FF" }} />
+)}
+
+<h2 className="text-2xl font-bold mt-2">
+  {mode === "edit" ? "Edit User Information" : "Create New User"}
+</h2>
+
+<p className="text-gray-500 text-sm">
+  {mode === "edit"
+    ? "Here, you can update your name, email address, and other information."
+    : "Fill out the form to add a new user to the system."}
+</p>
+
       </div>
 
       <Form
