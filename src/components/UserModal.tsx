@@ -23,22 +23,17 @@ const UserModal: React.FC<UserModalProps> = ({
   const [form] = Form.useForm();
 
   useEffect(() => {
-    if (!open) return;             
+    if (!open) return;
     if (mode === "edit" && initialValues) {
       form.setFieldsValue(initialValues);
     } else {
       form.resetFields();
     }
   }, [open, mode, initialValues, form]);
-  
-
-
 
   const handleFinish = (values: Partial<User>) => {
     onSubmit(values);
   };
-
-
 
   return (
     <Modal
@@ -47,25 +42,24 @@ const UserModal: React.FC<UserModalProps> = ({
       footer={null}
       closable={false}
       centered
-      style={{ maxWidth: 600, padding : 20 }}
+      style={{ maxWidth: 600, padding: 20 }}
     >
       <div className="flex flex-col items-center justify-center text-center mb-4">
-      {mode === "edit" ? (
-  <EditFilled style={{ fontSize: 56, color: "#1677FF" }} />
-) : (
-  <UserAddOutlined style={{ fontSize: 56, color: "#1677FF" }} />
-)}
+        {mode === "edit" ? (
+          <EditFilled style={{ fontSize: 56, color: "#1677FF" }} />
+        ) : (
+          <UserAddOutlined style={{ fontSize: 56, color: "#1677FF" }} />
+        )}
 
-<h2 className="text-2xl font-bold mt-2">
-  {mode === "edit" ? "Edit User Information" : "Create New User"}
-</h2>
+        <h2 className="text-2xl font-bold mt-2">
+          {mode === "edit" ? "Edit User Information" : "Create New User"}
+        </h2>
 
-<p className="text-gray-500 text-sm">
-  {mode === "edit"
-    ? "Here, you can update your name, email address, and other information."
-    : "Fill out the form to add a new user to the system."}
-</p>
-
+        <p className="text-gray-500 text-sm">
+          {mode === "edit"
+            ? "Here, you can update your name, email address, and other information."
+            : "Fill out the form to add a new user to the system."}
+        </p>
       </div>
 
       <Form

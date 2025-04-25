@@ -39,6 +39,7 @@ function App() {
         const data = await getUsers();
         setUsers(data);
       } catch (error) {
+        console.error("Fetch failed:", error);
         notification.error({
           message: "Error",
           description: "Failed to fetch users.",
@@ -66,6 +67,7 @@ function App() {
         placement: "top",
       });
     } catch (error) {
+      console.error("Delete failed:", error);
       api.error({
         message: "Error",
         description: "Failed to delete user.",
