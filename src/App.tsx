@@ -12,6 +12,7 @@ const { Title } = Typography;
 function App() {
   
   
+  
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -130,6 +131,7 @@ function App() {
   }
 
   setIsModalOpen(false);
+  setSelectedUser(null);
 };
 
   

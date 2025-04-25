@@ -23,12 +23,13 @@ const UserModal: React.FC<UserModalProps> = ({
   const [form] = Form.useForm();
 
   useEffect(() => {
+    if (!open) return;             
     if (mode === "edit" && initialValues) {
       form.setFieldsValue(initialValues);
-    } else if (mode === "create") {
+    } else {
       form.resetFields();
     }
-  }, [initialValues, mode, form]);
+  }, [open, mode, initialValues, form]);
   
 
 
